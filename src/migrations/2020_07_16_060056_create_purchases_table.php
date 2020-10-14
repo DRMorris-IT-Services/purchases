@@ -16,6 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_id');
+            $table->string('invoice_ref')->nullable();
             $table->string('supplier_id')->nullable();
             $table->date('invoice_date')->nullable();
             $table->date('invoice_due')->nullable();

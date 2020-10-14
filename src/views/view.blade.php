@@ -6,33 +6,29 @@
 @section('content')
 @foreach ($purchases as $inv)
 
-    <div class="content">
-        @include('purchases::layouts.alerts')
+<div class="container">
+
+    @include('purchases::layouts.alerts')
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" href="{{route('purchases')}}" role="tab" aria-controls="home" aria-selected="true">List</a>
   </li>
-  @if (AUTH::user()->purchases_edit == "on")
+  
   <li class="nav-item">
     <a class="nav-link" id="profile-tab" href="{{route('purchases.edit',['id' => $inv->invoice_id])}}" role="tab" aria-controls="profile" aria-selected="false">Edit</a>
   </li>
-  @endif
+  
 </ul>
-    
-        <div class="row">
-            
-            <div class="col-md-12 text-white">
-                
-                        <h2>Purchase Invoice - Ref: {{$inv->invoice_ref}}</h2>
-                   
-            </div>
-        </div>
-        
-        <div class="row">
 
-        
-        <div class="col-md-4 text-white">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header"><h3>Purchase Invoice - Ref: {{$inv->invoice_ref}}</h3></div>
+
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-4 ">
                 
                         <h5>Supplier</h5>
                     
@@ -55,7 +51,7 @@
                    
             </div>
 
-        <div class="col-md-4 text-white">
+        <div class="col-md-4">
                 
                         <h5 >Dates</h5>
                         
@@ -68,7 +64,7 @@
                    
             </div>
 
-            <div class="col-md-4 text-white">
+            <div class="col-md-4">
                
                         <h5 class="card-title">Status</h5>
                         
@@ -83,7 +79,7 @@
 
         <br><br>
         <div class="row">
-        <div class="col-md-12 text-white">
+        <div class="col-md-12 ">
                
                         <h5>Purchase Items</h5>
                         
@@ -126,7 +122,7 @@
 
         <br><br>
         <div class="row justify-content-end">
-            <div class="col-md-3 text-white">
+            <div class="col-md-3 ">
                 
                         <h5>Totals</h5>
                         
@@ -140,7 +136,17 @@
             </div>
         </div>
 
+                    
+
+            
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
 
 @endforeach
 @endsection
