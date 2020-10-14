@@ -5,7 +5,7 @@ namespace duncanrmorris\purchases\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class purchases_lines extends Model
+class suppliers extends Model
 {
     //
     use Notifiable;
@@ -16,6 +16,6 @@ class purchases_lines extends Model
      * @var array
      */
     protected $fillable = [
-        'invoice_id', 'supplier_id','qty', 'description', 'line_price', 'line_net', 'line_tax', 'line_total', 'tax_exempt',
+        'supplier_id',
     ];
 }

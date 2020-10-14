@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace duncanrmorris\purchases\Http\Controllers;
+
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\View;
 
 use App\purchases;
 use App\purchases_lines;

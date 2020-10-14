@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace duncanrmorris\purchases\Http\Controllers;
 
-use App\purchases;
-use App\purchases_lines;
-use App\suppliers;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\View;
+
+use duncanrmorris\purchases\App\purchases;
+use duncanrmorris\purchases\App\purchases_lines;
+use duncanrmorris\purchases\App\suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use PDF;
@@ -24,7 +27,7 @@ class PurchasesController extends Controller
 
         $unique = $supplier->unique('company');
 
-       return view('purchases.purchases',['purchases' => $purchases->orderby('invoice_date','DESC')->paginate(15), 'supplier' => $unique]);
+       return view('purchases::purchases',['purchases' => $purchases->orderby('invoice_date','DESC')->paginate(15), 'supplier' => $unique]);
     }
 
     /**
@@ -79,7 +82,7 @@ class PurchasesController extends Controller
         $supplier = suppliers::join('purchases','suppliers.supplier_id', '=', 'purchases.supplier_id')
         ->where('invoice_id',$id)->get();
         
-        return view('purchases.view', ['purchases' => $purchases->where('invoice_id',$id)->get(), 'purchases_lines' => $purchases_lines->where('invoice_id',$id)->get(), 'id' => $id, 'suppliers' => $suppliers->orderby('company','asc')->get(), 'supplier' => $supplier]);
+        return view('purchases::view', ['purchases' => $purchases->where('invoice_id',$id)->get(), 'purchases_lines' => $purchases_lines->where('invoice_id',$id)->get(), 'id' => $id, 'suppliers' => $suppliers->orderby('company','asc')->get(), 'supplier' => $supplier]);
     }
 
     /**
@@ -100,7 +103,7 @@ class PurchasesController extends Controller
         $grand_total = purchases_lines::where('supplier_id', $id)->sum('line_total');
 
         
-        return view('purchases.edit', ['purchases' => $purchases->where('invoice_id',$id)->get(), 'purchase_lines' => $purchases_lines->where('invoice_id',$id)->get(),
+        return view('purchases::edit', ['purchases' => $purchases->where('invoice_id',$id)->get(), 'purchase_lines' => $purchases_lines->where('invoice_id',$id)->get(),
         'total_net' => $total_net, 'total_tax' => $total_tax, 'grand_total' => $grand_total, 'suppliers' => $suppliers->orderby('company','asc')->get(), 'supplier' => $supplier]);
         
     }
@@ -156,7 +159,7 @@ class PurchasesController extends Controller
         $name = $show[0]['company'];
         $inv_date = $show[0]['invoice_date'];
 
-       $pdf = PDF::loadView('purchases.pdf', ['invoice' => $show, 'lines' => $lines]);
+       $pdf = PDF::loadView('purchases::pdf', ['invoice' => $show, 'lines' => $lines]);
         
        return $pdf->download("Purchase Invoice $name $inv_date.pdf");
 

@@ -7,7 +7,7 @@
 @foreach ($purchases as $inv)
 
     <div class="content">
-    @include('layouts.alerts')
+        @include('purchases::layouts.alerts')
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
